@@ -22,6 +22,11 @@ MbPage {
             wrapMode: Text.WordWrap
         }
 
+        MbItemText {
+            text: qsTr("Für den ersten Test neben einem bestehenden Tunnel zuerst eigene freie Remote-Ports verwenden.")
+            wrapMode: Text.WordWrap
+        }
+
         MbSwitch {
             name: qsTr("Dienst aktiv")
             bind: Utils.path(root.settingsPrefix, "/Enabled")

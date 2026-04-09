@@ -36,3 +36,4 @@ Konfigurierbar:
 - keine eingebetteten privaten Zielserverdaten
 - kein Überschreiben des systemeigenen Victron-`ssh-tunnel`
 - nutzt einen eigenen Dienst `com.coyodude.sshtunnel`
+- für den ersten Paralleltest zuerst freie Remote-Ports verwenden, damit es keine Port-Kollision mit dem bestehenden Tunnel gibt

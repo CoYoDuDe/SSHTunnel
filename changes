@@ -1,2 +1,4 @@
-v0.1.0
-- initial local package scaffold based on the existing custom ssh tunnel
+v0.1.1
+- clear the default key path so users must enter their own key file
+- run ssh in non-interactive mode with connect timeout and TCP keepalive
+- document the safe first test with separate remote ports beside the existing tunnel
