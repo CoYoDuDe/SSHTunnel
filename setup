@@ -1,0 +1,5 @@
+#!/bin/bash
+
+standardPromptAndActions='yes'
+
+source "/data/SetupHelper/HelperResources/IncludeHelpers"

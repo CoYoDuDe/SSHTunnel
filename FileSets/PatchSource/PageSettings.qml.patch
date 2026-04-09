@@ -1,0 +1,15 @@
+--- a/opt/victronenergy/gui/qml/PageSettings.qml
++++ b/opt/victronenergy/gui/qml/PageSettings.qml
+@@ -37,6 +37,12 @@
+ 		MbSubMenu {
+ 			description: qsTr("Remote Console")
+ 			subpage: Component { PageSettingsRemoteConsole {} }
++		}
++
++		MbSubMenu {
++			description: qsTr("SSH Tunnel")
++			subpage: Component { PageSettingsSSHTunnel {} }
++			showAccessLevel: User.AccessInstaller
+ 		}
+ 
+ 		MbSubMenu {

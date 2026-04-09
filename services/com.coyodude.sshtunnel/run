@@ -1,0 +1,5 @@
+#!/bin/sh
+exec 2>&1
+echo "*** starting custom ssh tunnel ***"
+. /etc/profile.d/profile.sh
+exec /data/SSHTunnel/ssh_tunnel.py
