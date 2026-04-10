@@ -1,5 +1,5 @@
 v1.0
-- first stable SetupHelper release
-- persistent SSH tunnel settings via com.victronenergy.settings
-- separate service without touching the original Victron ssh-tunnel
-- GUI cleanup and compatible Venus QML page
+- Erste stabile SetupHelper-Version.
+- Persistente SSH-Tunnel-Einstellungen ueber com.victronenergy.settings.
+- Separater Dienst ohne Eingriff in den originalen Victron ssh-tunnel.
+- GUI fuer Venus OS bereinigt und auf dem Zielsystem verifiziert.
