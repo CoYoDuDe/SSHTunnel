@@ -40,7 +40,7 @@ SUPPORTED_SETTINGS = {
     "enabled": ["{}/Enabled".format(SETTINGS_PATH), 0, 0, 1],
     "server": ["{}/Server".format(SETTINGS_PATH), "", 0, 0],
     "username": ["{}/Username".format(SETTINGS_PATH), "root", 0, 0],
-    "key_path": ["{}/KeyPath".format(SETTINGS_PATH), "", 0, 0],
+    "key_path": ["{}/KeyPath".format(SETTINGS_PATH), "/data/keys/ssh_host_rsa_key", 0, 0],
     "strict_host_key_checking": ["{}/StrictHostKeyChecking".format(SETTINGS_PATH), 1, 0, 1],
     "reconnect_delay": ["{}/ReconnectDelay".format(SETTINGS_PATH), 5, 1, 600],
     "tunnel1_enabled": ["{}/Tunnel1Enabled".format(SETTINGS_PATH), 0, 0, 1],

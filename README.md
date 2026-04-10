@@ -7,7 +7,7 @@ Eigenes SetupHelper-Paket für einen benutzerkonfigurierbaren SSH-Tunnel, getren
 - keine festen Serverdaten im Repository
 - Benutzer tragen ihre eigenen Daten im GUI ein
 - Werte liegen in `com.victronenergy.settings` und bleiben bei Paket-Updates erhalten
-- leerer `KeyPath` nutzt automatisch bekannte Standardpfade wie `/data/keys/ssh_host_rsa_key`
+- der Standard-`KeyPath` ist `/data/keys/ssh_host_rsa_key`
 
 ## Installation
 

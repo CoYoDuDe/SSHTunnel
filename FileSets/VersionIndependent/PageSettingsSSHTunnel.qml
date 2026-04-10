@@ -44,11 +44,6 @@ MbPage {
             writeAccessLevel: User.AccessInstaller
         }
 
-        MbItemText {
-            text: qsTr("Leer = automatisch /data/keys/ssh_host_rsa_key verwenden")
-            wrapMode: Text.WordWrap
-        }
-
         MbSwitch {
             name: qsTr("StrictHostKeyChecking")
             bind: Utils.path(root.settingsPrefix, "/StrictHostKeyChecking")
