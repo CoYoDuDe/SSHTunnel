@@ -2,9 +2,7 @@
 
 Eigenes SetupHelper-Paket für einen benutzerkonfigurierbaren SSH-Tunnel, getrennt vom systemeigenen Victron-`ssh-tunnel`.
 
-Das Paket baut auf dem SetupHelper-Projekt von `kwindrem` auf:
-
-- `https://github.com/kwindrem/SetupHelper`
+Das Paket baut auf [SetupHelper](https://github.com/kwindrem/SetupHelper) von [kwindrem](https://github.com/kwindrem) auf.
 
 ## Zweck
 
@@ -17,7 +15,7 @@ Das Paket baut auf dem SetupHelper-Projekt von `kwindrem` auf:
 
 Voraussetzung:
 
-- `SetupHelper` von `kwindrem` ist bereits installiert
+- [SetupHelper](https://github.com/kwindrem/SetupHelper) von [kwindrem](https://github.com/kwindrem) ist bereits installiert
 
 Im `Package manager`:
 
