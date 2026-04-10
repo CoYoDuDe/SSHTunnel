@@ -83,7 +83,6 @@ MbPage {
             description: qsTr("Tunnel 1 Remote-Port")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel1RemotePort")
             maximumLength: 5
-            show: enabledItem.valid && enabledItem.value && tunnel1EnabledItem.valid && tunnel1EnabledItem.value
             writeAccessLevel: User.AccessInstaller
             onEditDone: {
                 var value = parseInt(newValue, 10)
@@ -97,7 +96,6 @@ MbPage {
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel1LocalHost")
             maximumLength: 80
             overwriteMode: false
-            show: enabledItem.valid && enabledItem.value && tunnel1EnabledItem.valid && tunnel1EnabledItem.value
             writeAccessLevel: User.AccessInstaller
         }
 
@@ -105,7 +103,6 @@ MbPage {
             description: qsTr("Tunnel 1 Zielport lokal")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel1LocalPort")
             maximumLength: 5
-            show: enabledItem.valid && enabledItem.value && tunnel1EnabledItem.valid && tunnel1EnabledItem.value
             writeAccessLevel: User.AccessInstaller
             onEditDone: {
                 var value = parseInt(newValue, 10)
@@ -128,7 +125,6 @@ MbPage {
             description: qsTr("Tunnel 2 Remote-Port")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel2RemotePort")
             maximumLength: 5
-            show: enabledItem.valid && enabledItem.value && tunnel2EnabledItem.valid && tunnel2EnabledItem.value
             writeAccessLevel: User.AccessInstaller
             onEditDone: {
                 var value = parseInt(newValue, 10)
@@ -142,7 +138,6 @@ MbPage {
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel2LocalHost")
             maximumLength: 80
             overwriteMode: false
-            show: enabledItem.valid && enabledItem.value && tunnel2EnabledItem.valid && tunnel2EnabledItem.value
             writeAccessLevel: User.AccessInstaller
         }
 
@@ -150,7 +145,6 @@ MbPage {
             description: qsTr("Tunnel 2 Zielport lokal")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel2LocalPort")
             maximumLength: 5
-            show: enabledItem.valid && enabledItem.value && tunnel2EnabledItem.valid && tunnel2EnabledItem.value
             writeAccessLevel: User.AccessInstaller
             onEditDone: {
                 var value = parseInt(newValue, 10)
