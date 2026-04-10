@@ -2,6 +2,10 @@
 
 Eigenes SetupHelper-Paket für einen benutzerkonfigurierbaren SSH-Tunnel, getrennt vom systemeigenen Victron-`ssh-tunnel`.
 
+Das Paket baut auf dem SetupHelper-Projekt von `kwindrem` auf:
+
+- `https://github.com/kwindrem/SetupHelper`
+
 ## Zweck
 
 - keine festen Serverdaten im Repository
@@ -10,6 +14,10 @@ Eigenes SetupHelper-Paket für einen benutzerkonfigurierbaren SSH-Tunnel, getren
 - der Standard-`KeyPath` ist `/data/keys/ssh_host_rsa_key`
 
 ## Installation
+
+Voraussetzung:
+
+- `SetupHelper` von `kwindrem` ist bereits installiert
 
 Im `Package manager`:
 
