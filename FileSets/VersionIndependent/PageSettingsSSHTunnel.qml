@@ -70,7 +70,6 @@ MbPage {
         MbEditBox {
             description: qsTr("Reconnect-Verzögerung [s]")
             item.bind: Utils.path(root.settingsPrefix, "/ReconnectDelay")
-            inputMethodHints: Qt.ImhDigitsOnly
             maximumLength: 4
             writeAccessLevel: User.AccessInstaller
             onEditDone: {
@@ -93,7 +92,6 @@ MbPage {
         MbEditBox {
             description: qsTr("Tunnel 1 Remote-Port")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel1RemotePort")
-            inputMethodHints: Qt.ImhDigitsOnly
             maximumLength: 5
             show: enabledItem.valid && enabledItem.value && tunnel1EnabledItem.valid && tunnel1EnabledItem.value
             writeAccessLevel: User.AccessInstaller
@@ -116,7 +114,6 @@ MbPage {
         MbEditBox {
             description: qsTr("Tunnel 1 Zielport lokal")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel1LocalPort")
-            inputMethodHints: Qt.ImhDigitsOnly
             maximumLength: 5
             show: enabledItem.valid && enabledItem.value && tunnel1EnabledItem.valid && tunnel1EnabledItem.value
             writeAccessLevel: User.AccessInstaller
@@ -140,7 +137,6 @@ MbPage {
         MbEditBox {
             description: qsTr("Tunnel 2 Remote-Port")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel2RemotePort")
-            inputMethodHints: Qt.ImhDigitsOnly
             maximumLength: 5
             show: enabledItem.valid && enabledItem.value && tunnel2EnabledItem.valid && tunnel2EnabledItem.value
             writeAccessLevel: User.AccessInstaller
@@ -163,7 +159,6 @@ MbPage {
         MbEditBox {
             description: qsTr("Tunnel 2 Zielport lokal")
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel2LocalPort")
-            inputMethodHints: Qt.ImhDigitsOnly
             maximumLength: 5
             show: enabledItem.valid && enabledItem.value && tunnel2EnabledItem.valid && tunnel2EnabledItem.value
             writeAccessLevel: User.AccessInstaller
