@@ -31,6 +31,11 @@ from settingsdevice import SettingsDevice  # type: ignore
 
 
 SETTINGS_PATH = "/Settings/SSHTunnel"
+DEFAULT_KEY_PATH_CANDIDATES = (
+    "/data/keys/ssh_host_rsa_key",
+    "/data/keys/id_rsa",
+    "/data/SSHTunnel/id_rsa",
+)
 SUPPORTED_SETTINGS = {
     "enabled": ["{}/Enabled".format(SETTINGS_PATH), 0, 0, 1],
     "server": ["{}/Server".format(SETTINGS_PATH), "", 0, 0],
@@ -114,14 +119,20 @@ class TunnelManager(object):
         if not self._as_text(self._setting("server"), ""):
             logging.info("SSH tunnel disabled until a server is configured")
             return False
-        key_path = self._as_text(self._setting("key_path"), "")
-        if not key_path:
-            logging.info("SSH tunnel disabled until a key path is configured")
-            return False
+        key_path = self._resolved_key_path()
         if not os.path.isfile(key_path):
             logging.warning("SSH tunnel disabled until key file exists: %s", key_path)
             return False
         return True
+
+    def _resolved_key_path(self):
+        configured = self._as_text(self._setting("key_path"), "")
+        if configured:
+            return configured
+        for candidate in DEFAULT_KEY_PATH_CANDIDATES:
+            if os.path.isfile(candidate):
+                return candidate
+        return ""
 
     def _build_desired(self):
         desired = {}
@@ -148,7 +159,7 @@ class TunnelManager(object):
     def _build_command(self, config):
         server = self._as_text(self._setting("server"), "")
         username = self._as_text(self._setting("username"), "root")
-        key_path = self._as_text(self._setting("key_path"), "")
+        key_path = self._resolved_key_path()
         strict = "yes" if self._as_bool(self._setting("strict_host_key_checking")) else "no"
         reverse = "{remote}:localhost:{local}".format(remote=config.remote_port, local=config.local_port)
         if config.local_host and config.local_host != "localhost":

@@ -12,21 +12,6 @@ MbPage {
     property VBusItem tunnel2EnabledItem: VBusItem { bind: Utils.path(settingsPrefix, "/Tunnel2Enabled") }
 
     model: VisibleItemModel {
-        MbItemText {
-            text: qsTr("Konfiguriert einen eigenen SSH-Tunnel getrennt vom systemeigenen Victron-Tunnel.")
-            wrapMode: Text.WordWrap
-        }
-
-        MbItemText {
-            text: qsTr("Die Einstellungen werden in com.victronenergy.settings gespeichert und bleiben dadurch nach Paket-Updates erhalten.")
-            wrapMode: Text.WordWrap
-        }
-
-        MbItemText {
-            text: qsTr("Für den ersten Test neben einem bestehenden Tunnel zuerst eigene freie Remote-Ports verwenden.")
-            wrapMode: Text.WordWrap
-        }
-
         MbSwitch {
             name: qsTr("Dienst aktiv")
             bind: Utils.path(root.settingsPrefix, "/Enabled")
@@ -57,6 +42,11 @@ MbPage {
             maximumLength: 120
             overwriteMode: false
             writeAccessLevel: User.AccessInstaller
+        }
+
+        MbItemText {
+            text: qsTr("Leer = automatisch /data/keys/ssh_host_rsa_key verwenden")
+            wrapMode: Text.WordWrap
         }
 
         MbSwitch {
