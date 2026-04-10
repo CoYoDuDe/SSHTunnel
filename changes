@@ -1,4 +1,5 @@
-v0.1.1
-- clear the default key path so users must enter their own key file
-- run ssh in non-interactive mode with connect timeout and TCP keepalive
-- document the safe first test with separate remote ports beside the existing tunnel
+v1.0
+- first stable SetupHelper release
+- persistent SSH tunnel settings via com.victronenergy.settings
+- separate service without touching the original Victron ssh-tunnel
+- GUI cleanup and compatible Venus QML page
