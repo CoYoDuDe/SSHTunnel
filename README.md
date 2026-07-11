@@ -45,3 +45,13 @@ Konfigurierbar:
 - nutzt einen eigenen Dienst `com.coyodude.sshtunnel`
 - für den ersten Paralleltest zuerst freie Remote-Ports verwenden, damit es keine Port-Kollision mit dem bestehenden Tunnel gibt
 - Passwort-Login ist bewusst nicht vorgesehen; der Dienst ist für Schlüssel-basierte Anmeldung ausgelegt
+
+## Unterstützung
+
+Dieses Projekt wird unabhängig und privat entwickelt und kostenlos bereitgestellt. Freiwillige Unterstützung hilft bei Infrastruktur, Servern, Domains, Tests, Wartung und Weiterentwicklung.
+
+- [PayPal](https://paypal.me/CoYoDuDe)
+- [Buy Me a Coffee](https://www.buymeacoffee.com/CoYoDuDe)
+- [Weitere Projekte und Informationen](https://dnsmith.net/)
+
+Unterstützung ist freiwillig. Es gibt keinen Abo-Zwang und daraus entsteht kein Anspruch auf bestimmte Funktionen oder persönlichen Support.
