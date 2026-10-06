@@ -1,3 +1,10 @@
+v1.2
+- Gefuehrter Einrichtungsassistent mit unabhaengiger Host-Fingerprint-Pruefung, eigenem Pi-Schluessel und eingeschraenkten Serverrechten.
+- Einmaliger Serverlogin ueber OpenSSH; keine Passwortspeicherung. Optionaler Administrator-Schritt fuer Server ohne Passwortlogin.
+- Einstellbarer SSH-Serverport und passende GUI-Einstellung.
+- Entwicklungstests bleiben lokal und werden nicht ausgeliefert.
+- Live geprueft: Schluesselanmeldung, SSH ueber Server-Ruecktunnel und geschuetzter Webzugriff auf Venus3.81.
+
 v1.1
 - SetupHelper 9.4: Patch-Werkzeug auch fuer Deinstallation initialisieren; andere Menueeintraege bleiben erhalten.
 - Laufende Tunnel bei geaenderten Server-, Benutzer-, Schluessel- und Hostkey-Einstellungen neu starten.

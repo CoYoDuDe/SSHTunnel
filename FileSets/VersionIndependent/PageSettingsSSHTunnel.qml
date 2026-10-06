@@ -37,6 +37,18 @@ MbPage {
         }
 
         MbEditBox {
+            description: qsTr("SSH-Server-Port")
+            item.bind: Utils.path(root.settingsPrefix, "/ServerPort")
+            maximumLength: 5
+            writeAccessLevel: User.AccessInstaller
+            function editTextToValue() {
+                if (!/^[0-9]+$/.test(_editText.trim())) return null
+                var port = Number(_editText.trim())
+                return port >= 1 && port <= 65535 ? port : null
+            }
+        }
+
+        MbEditBox {
             description: qsTr("Schlüsselpfad")
             item.bind: Utils.path(root.settingsPrefix, "/KeyPath")
             maximumLength: 120
@@ -146,6 +158,11 @@ MbPage {
                 if (!isNaN(value) && value > 0)
                     item.setValue(value)
             }
+        }
+
+        MbItemText {
+            text: qsTr("Ersteinrichtung im Terminal: python3 /data/SSHTunnel/configure.py. Der Assistent prüft den Hostschlüssel und richtet die Anmeldung per Schlüssel ein. Kein Passwort wird gespeichert.")
+            wrapMode: Text.WordWrap
         }
     }
 }

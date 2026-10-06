@@ -39,6 +39,7 @@ DEFAULT_KEY_PATH_CANDIDATES = (
 SUPPORTED_SETTINGS = {
     "enabled": ["{}/Enabled".format(SETTINGS_PATH), 0, 0, 1],
     "server": ["{}/Server".format(SETTINGS_PATH), "", 0, 0],
+    "server_port": ["{}/ServerPort".format(SETTINGS_PATH), 22, 1, 65535],
     "username": ["{}/Username".format(SETTINGS_PATH), "root", 0, 0],
     "key_path": ["{}/KeyPath".format(SETTINGS_PATH), "/data/keys/ssh_host_rsa_key", 0, 0],
     "strict_host_key_checking": ["{}/StrictHostKeyChecking".format(SETTINGS_PATH), 1, 0, 1],
@@ -172,6 +173,7 @@ class TunnelManager(object):
 
         return [
             "ssh",
+            "-p", str(self._as_int(self._setting("server_port"), 22)),
             "-i", key_path,
             "-o", "BatchMode=yes",
             "-o", "ConnectTimeout=20",
@@ -182,7 +184,8 @@ class TunnelManager(object):
             "-o", "TCPKeepAlive=yes",
             "-nNT",
             "-R", reverse,
-            "{user}@{server}".format(user=username, server=server),
+            "-l", username,
+            "--", server,
         ]
 
     def _reload(self):

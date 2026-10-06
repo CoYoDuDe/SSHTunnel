@@ -55,3 +55,21 @@ Dieses Projekt wird unabhängig und privat entwickelt und kostenlos bereitgestel
 - [Weitere Projekte und Informationen](https://dnsmith.net/)
 
 Unterstützung ist freiwillig. Es gibt keinen Abo-Zwang und daraus entsteht kein Anspruch auf bestimmte Funktionen oder persönlichen Support.
+
+## Gefuehrte Ersteinrichtung ab v1.2
+
+Nach der Installation als root auf dem Venus-Geraet ausfuehren:
+
+```sh
+python3 /data/SSHTunnel/configure.py
+```
+
+Server und Benutzer einmal angeben. Den angezeigten Hostschluessel-Fingerabdruck unabhaengig am Server pruefen; dort zum Beispiel `ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub` verwenden. Der Assistent erzeugt einen eigenen Schluessel auf dem Pi. OpenSSH fragt bei Bedarf einmal nach dem vorhandenen Serverpasswort; das Addon speichert es nicht. Der private Pi-Schluessel bleibt auf dem Pi.
+
+Der Server benoetigt OpenSSH mit `restrict`/`permitlisten` und die Standardprogramme `flock`, `awk`, `mktemp`. Der installierte Schluessel darf nur die ausgewaehlten Loopback-Tunnelports oeffnen; Shell, PTY, Agent- und X11-Forwarding sind gesperrt. Ausgehende lokale Weiterleitungen sind auf den ungenutzten Port localhost:1 begrenzt. Bestehende andere Server-Schluessel bleiben erhalten.
+
+Bei einem Server ohne Passwortlogin `--prepare-only` verwenden, den ausgegebenen Befehl ueber den vorhandenen Administratorzugang ausfuehren und den Assistenten mit `--skip-provision` wiederholen. `--port` setzt einen abweichenden SSH-Serverport. `--fingerprint` nimmt einen bereits unabhaengig bestaetigten Fingerabdruck entgegen.
+
+Standardmaessig wird nur der SSH-Ruecktunnel (Server localhost:2201 auf Pi localhost:22) aktiviert. `--remote-web-port 8081` aktiviert zusaetzlich den Webtunnel; zuvor muss der externe Reverse Proxy TLS und einen Anmeldeschutz erhalten. Die lokale Venus-Konsole kann ungeschuetzt sein. Keine Tunnelports oeffentlich freigeben.
+
+Die abschliessende Schluesselpruefung bestaetigt die SSH-Anmeldung. Eventuelle belegte oder serverseitig gesperrte Weiterleitungsports erscheinen im Dienstlog `/var/log/com.coyodude.sshtunnel/current`.
