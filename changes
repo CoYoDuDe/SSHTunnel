@@ -1,3 +1,9 @@
+v1.1
+- SetupHelper 9.4: Patch-Werkzeug auch fuer Deinstallation initialisieren; andere Menueeintraege bleiben erhalten.
+- Laufende Tunnel bei geaenderten Server-, Benutzer-, Schluessel- und Hostkey-Einstellungen neu starten.
+- Fehlgeschlagenen Prozessstart mit monotoner Wartezeit erneut versuchen.
+- Venus OS v3.81: Installation, Deinstallation, erneute und wiederholte Installation sowie Classic-GUI geprueft. Externe Tunnelverbindung noch nicht eingerichtet.
+
 v1.0
 - Erste stabile SetupHelper-Version.
 - Persistente SSH-Tunnel-Einstellungen ueber com.victronenergy.settings.

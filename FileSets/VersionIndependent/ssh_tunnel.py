@@ -72,9 +72,10 @@ class TunnelConfig(object):
 
 
 class TunnelState(object):
-    def __init__(self, config, process):
+    def __init__(self, config, process, command):
         self.config = config
         self.process = process
+        self.command = tuple(command)
         self.retry_after = 0
 
 
@@ -188,7 +189,9 @@ class TunnelManager(object):
         desired = self._build_desired()
 
         for name in list(self._states.keys()):
-            if name not in desired or self._states[name].config != desired[name]:
+            if (name not in desired
+                    or self._states[name].config != desired[name]
+                    or self._states[name].command != tuple(self._build_command(desired[name]))):
                 self._stop(name)
 
         self._desired = desired
@@ -205,7 +208,14 @@ class TunnelManager(object):
             return
         command = self._build_command(config)
         logging.info("Starting %s: %s", name, " ".join(command))
-        self._states[name] = TunnelState(config, subprocess.Popen(command))
+        state = TunnelState(config, None, command)
+        self._states[name] = state
+        try:
+            state.process = subprocess.Popen(command)
+        except OSError as exc:
+            logging.error("Unable to start %s: %s", name, exc)
+            state.retry_after = time.monotonic() + max(
+                1, self._as_int(self._setting("reconnect_delay"), 5))
 
     def _stop(self, name):
         state = self._states.pop(name, None)
@@ -221,7 +231,7 @@ class TunnelManager(object):
 
     def _poll(self):
         reconnect_delay = max(1, self._as_int(self._setting("reconnect_delay"), 5))
-        now = time.time()
+        now = time.monotonic()
         for name in list(self._states.keys()):
             state = self._states[name]
             if state.process is None:
