@@ -10,6 +10,14 @@ MbPage {
     property VBusItem enabledItem: VBusItem { bind: Utils.path(settingsPrefix, "/Enabled") }
     property VBusItem tunnel1EnabledItem: VBusItem { bind: Utils.path(settingsPrefix, "/Tunnel1Enabled") }
     property VBusItem tunnel2EnabledItem: VBusItem { bind: Utils.path(settingsPrefix, "/Tunnel2Enabled") }
+    property VBusItem managementModeItem: VBusItem { bind: Utils.path(settingsPrefix, "/ManagementMode") }
+
+    function integerValue(text, minimum, maximum) {
+        var value = String(text).trim()
+        if (!/^[0-9]+$/.test(value)) return null
+        var number = Number(value)
+        return isFinite(number) && number >= minimum && number <= maximum ? number : null
+    }
 
     model: VisibleItemModel {
         MbSwitch {
@@ -69,11 +77,39 @@ MbPage {
             item.bind: Utils.path(root.settingsPrefix, "/ReconnectDelay")
             maximumLength: 4
             writeAccessLevel: User.AccessInstaller
-            onEditDone: {
-                var value = parseInt(newValue, 10)
-                if (!isNaN(value) && value > 0)
-                    item.setValue(value)
+            function editTextToValue() { return root.integerValue(_editText, 1, 600) }
+        }
+
+        MbItemOptions {
+            description: qsTr("Verbindungsweg")
+            bind: Utils.path(root.settingsPrefix, "/ManagementMode")
+            writeAccessLevel: User.AccessInstaller
+            possibleValues: [
+                MbOption { description: qsTr("Systemverbindung"); value: 0 },
+                MbOption { description: qsTr("RoadLink-VPN"); value: 1 }
+            ]
+        }
+
+        MbEditBox {
+            description: qsTr("Öffentliche Server-IPv4")
+            item.bind: Utils.path(root.settingsPrefix, "/ManagementIPv4")
+            maximumLength: 15
+            overwriteMode: false
+            writeAccessLevel: User.AccessInstaller
+            function editTextToValue() {
+                var parts = _editText.trim().split(".")
+                if (parts.length !== 4) return null
+                for (var i = 0; i < parts.length; i++) {
+                    if (!/^(0|[1-9][0-9]{0,2})$/.test(parts[i]) || Number(parts[i]) > 255) return null
+                }
+                return parts.join(".")
             }
+        }
+
+        MbItemText {
+            show: root.managementModeItem.valid && Number(root.managementModeItem.value) === 1
+            text: qsTr("RoadLink-VPN wartet auf den geprüften VPN-Weg. Servername und Hostschlüssel bleiben maßgeblich. Bei ausgeschaltetem VPN verbindet dieser Modus nicht.")
+            wrapMode: Text.WordWrap
         }
 
         MbItemText { text: qsTr("Tunnel 1") }
@@ -91,11 +127,7 @@ MbPage {
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel1RemotePort")
             maximumLength: 5
             writeAccessLevel: User.AccessInstaller
-            onEditDone: {
-                var value = parseInt(newValue, 10)
-                if (!isNaN(value) && value > 0)
-                    item.setValue(value)
-            }
+            function editTextToValue() { return root.integerValue(_editText, 1, 65535) }
         }
 
         MbEditBox {
@@ -111,11 +143,7 @@ MbPage {
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel1LocalPort")
             maximumLength: 5
             writeAccessLevel: User.AccessInstaller
-            onEditDone: {
-                var value = parseInt(newValue, 10)
-                if (!isNaN(value) && value > 0)
-                    item.setValue(value)
-            }
+            function editTextToValue() { return root.integerValue(_editText, 1, 65535) }
         }
 
         MbItemText { text: qsTr("Tunnel 2") }
@@ -133,11 +161,7 @@ MbPage {
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel2RemotePort")
             maximumLength: 5
             writeAccessLevel: User.AccessInstaller
-            onEditDone: {
-                var value = parseInt(newValue, 10)
-                if (!isNaN(value) && value > 0)
-                    item.setValue(value)
-            }
+            function editTextToValue() { return root.integerValue(_editText, 1, 65535) }
         }
 
         MbEditBox {
@@ -153,11 +177,7 @@ MbPage {
             item.bind: Utils.path(root.settingsPrefix, "/Tunnel2LocalPort")
             maximumLength: 5
             writeAccessLevel: User.AccessInstaller
-            onEditDone: {
-                var value = parseInt(newValue, 10)
-                if (!isNaN(value) && value > 0)
-                    item.setValue(value)
-            }
+            function editTextToValue() { return root.integerValue(_editText, 1, 65535) }
         }
 
         MbItemText {

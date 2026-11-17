@@ -1,3 +1,11 @@
+v1.3
+- Wählbarer Verbindungsweg im Menü: Systemverbindung (Standard) oder RoadLink-VPN mit öffentlicher Server-IPv4; der bestätigte Server-Hostschlüssel bleibt maßgeblich, ohne belegten VPN-Weg kein stiller Rückfall.
+- Laufende, VPN-gebundene Tunnel überstehen bis zu 90 Sekunden Beobachtungslücke beim WAN-Wechsel; neue Verbindungen nur mit aktuellem Wegnachweis.
+- Wegprüfung nur noch alle 10 Sekunden statt alle 2 Sekunden: etwa 80 % weniger CPU-Last auf dem Pi; Einstellungsänderungen und Tunnel-Neustarts prüfen weiterhin sofort.
+- Management-Listener ausdrücklich auf IPv4-Loopback.
+- Deinstallation erhält gemeinsame Menüs und fremde Paketregistrierungen.
+- Geprüft: SetupHelper-Installation, Update, Deinstallation und Neuinstallation in isolierter Umgebung auf Venus OS; Menüseite; produktiver Betrieb seit 26.10.2026.
+
 v1.2
 - Gefuehrter Einrichtungsassistent mit unabhaengiger Host-Fingerprint-Pruefung, eigenem Pi-Schluessel und eingeschraenkten Serverrechten.
 - Einmaliger Serverlogin ueber OpenSSH; keine Passwortspeicherung. Optionaler Administrator-Schritt fuer Server ohne Passwortlogin.

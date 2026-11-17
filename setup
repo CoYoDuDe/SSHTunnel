@@ -1,6 +1,6 @@
 #!/bin/bash
 
-standardPromptAndActions='yes'
+standardPromptAndActions='no'
 
 # SetupHelper 9.4 selects its patch tool only for INSTALL/CHECK. UNINSTALL
 # still needs it to reverse our menu patch without removing other addons.
@@ -14,3 +14,38 @@ else
 fi
 
 source "/data/SetupHelper/HelperResources/IncludeHelpers"
+
+# Protect shared menu files and package registrations in this setup process.
+# Keep SetupHelper itself unchanged; reject unknown restore function layouts
+# before any addon service, settings or output operation.
+addonRestoreDefinition=$(declare -f restoreActiveFile | python3 "$scriptDir/setup_registry.py" adapt) || exit 245
+eval "$addonRestoreDefinition" || exit 245
+unset addonRestoreDefinition
+addonRemoveRegistryLine ()
+{
+    python3 "$scriptDir/setup_registry.py" remove "$1" "$2"
+}
+
+# Preserve the absence of a vendor original across changed addon updates.
+eval "$(declare -f backupActiveFile | sed '1s/backupActiveFile/sshTunnelOriginalBackupActiveFile/')"
+backupActiveFile ()
+{
+    case "$1" in
+        /opt/victronenergy/gui/qml/PageSettingsSSHTunnel.qml|/data/SSHTunnel/ssh_tunnel.py)
+            if ! $installFailed; then
+                if [ -e "$1.orig" ]; then
+                    # A real backup takes precedence over a stale absent marker.
+                    rm -f "$1.NO_ORIG"
+                elif [ -f "$1.NO_ORIG" ]; then
+                    return 1
+                fi
+            fi
+            ;;
+    esac
+    sshTunnelOriginalBackupActiveFile "$@"
+}
+
+if [ "$scriptAction" = 'NONE' ]; then
+    standardActionPrompt
+fi
+endScript 'INSTALL_FILES' 'INSTALL_SERVICES' 'ADD_DBUS_SETTINGS'
